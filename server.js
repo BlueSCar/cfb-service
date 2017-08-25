@@ -5,7 +5,7 @@ try {
     let cfb = require('cfb-data');
     let RateLimiter = require('limiter').RateLimiter;
     let Promise = require('bluebird');
-    let google = require('google');
+    let google = require('googleapis');
     let googleAuth = require('google-auth-library');
 
     let redis = require('redis');
