@@ -12,7 +12,9 @@ try {
     let redisClient = require('./lib/redis')(redis, Promise);
 
     let driveClient = require('./lib/google')(RateLimiter, google, googleAuth, Promise, redisClient);
-    driveClient.setFolders(2017, 1);
+    
+    let gamesClient = require('./lib/games')(cfb, driveClient, redisClient);
+    gamesClient.syncGames();
 
 } catch (err) {
     console.error(err);
