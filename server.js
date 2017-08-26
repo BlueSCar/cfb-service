@@ -9,17 +9,10 @@ try {
     let googleAuth = require('google-auth-library');
 
     let redis = require('redis');
+    let redisClient = require('./lib/redis')(redis, Promise);
 
-    let redisClient = require('./config/redis')(redis, Promise);
-
-    redisClient.setWeek(1);
-    redisClient.setYear(2017);
-    redisClient.getWeek().then((result) => console.log(result));
-    redisClient.getYear().then((result) => console.log(result));
-
-    redisClient.addGame("123123");
-    redisClient.isGameAdded("123123").then((result) => console.log(result));
-    redisClient.clearGames();
+    let driveClient = require('./lib/google')(RateLimiter, google, googleAuth, Promise, redisClient);
+    driveClient.setFolders(2017, 1);
 
 } catch (err) {
     console.error(err);
