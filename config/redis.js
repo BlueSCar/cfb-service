@@ -1,7 +1,4 @@
 module.exports = (redis, Promise) => {
-    let redis = redis;
-    let Promise = Promise;
-
     let client = redis.createClient();
 
     this.setWeek = (week) => {
