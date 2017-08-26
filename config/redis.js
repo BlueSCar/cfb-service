@@ -1,12 +1,12 @@
 module.exports = (redis, Promise) => {
-    this.client = redis.createClient();
+    let client = redis.createClient();
 
     let setWeek = (week) => {
-        this.client.set("seasonWeek", week);
+        client.set("seasonWeek", week);
     }
 
     let getWeek = () => {
-        return Promise.fromCallback((cb) => this.client.get("seasonWeek", cb));
+        return Promise.fromCallback((cb) => client.get("seasonWeek", cb));
     }
 
     let setYear = (year) => {
@@ -14,19 +14,19 @@ module.exports = (redis, Promise) => {
     }
 
     let getYear = () => {
-        return Promise.fromCallback((cb) => this.client.get("seasonYear", cb));
+        return Promise.fromCallback((cb) => client.get("seasonYear", cb));
     }
 
     let clearGames = () => {
-        this.client.del("gameIds");
+        client.del("gameIds");
     }
 
     let addGame = (gameId) => {
-        this.client.sadd("gameIds", gameId);
+        client.sadd("gameIds", gameId);
     }
 
     let isGameAdded = (gameId) => {
-        return Promise.fromCallback((cb) => this.client.sismember("gameIds", gameId, cb));
+        return Promise.fromCallback((cb) => client.sismember("gameIds", gameId, cb));
     }
 
     return {

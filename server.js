@@ -21,10 +21,6 @@ try {
     redisClient.isGameAdded("123123").then((result) => console.log(result));
     redisClient.clearGames();
 
-    client.sadd("gameIds", "game1");
-    client.sadd("gameIds", "game2");
-    client.sadd("gameIds", "game3");
-
 } catch (err) {
     console.error(err);
 }
