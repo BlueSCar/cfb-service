@@ -1,31 +1,41 @@
 module.exports = (redis, Promise) => {
     let client = redis.createClient();
 
-    this.setWeek = (week) => {
+    let setWeek = (week) => {
         client.set("seasonWeek", week);
     }
 
-    this.getWeek = () => {
+    let getWeek = () => {
         return Promise.fromCallback((cb) => client.get("seasonWeek", cb));
     }
 
-    this.setYear = (year) => {
+    let setYear = (year) => {
         client.set("seasonYear", year);
     }
 
-    this.getYear = () => {
+    let getYear = () => {
         return Promise.fromCallback((cb) => client.get("seasonYear", cb));
     }
 
-    this.clearGames = () => {
+    let clearGames = () => {
         client.del("gameIds");
     }
 
-    this.addGame = (gameId) => {
+    let addGame = (gameId) => {
         client.sadd("gameIds", gameId);
     }
 
-    this.isGameAdded = (gameId) => {
+    let isGameAdded = (gameId) => {
         return Promise.fromCallback((cb) => client.sismember("gameIds", gameId, cb));
+    }
+
+    return {
+        setWeek: setWeek,
+        setYear: setYear,
+        getWeek: getWeek,
+        getYear: getYear,
+        clearGames: clearGames,
+        addGame: addGame,
+        isGameAdded: isGameAdded
     }
 }
