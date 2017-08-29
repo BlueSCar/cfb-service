@@ -14,6 +14,9 @@ try {
     let driveClient = require('./lib/google')(RateLimiter, google, googleAuth, Promise, redisClient);
     
     let gamesClient = require('./lib/games')(cfb, driveClient, redisClient);
+
+    redisClient.setYear(null);
+    redisClient.setWeek(null);
     gamesClient.syncGames();
 
 } catch (err) {
